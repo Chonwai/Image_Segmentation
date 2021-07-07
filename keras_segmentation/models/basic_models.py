@@ -1,6 +1,10 @@
-from keras.models import *
-from keras.layers import *
-import keras.backend as K
+# from keras.models import *
+# from keras.layers import *
+# import keras.backend as K
+import tensorflow.keras.backend as K
+from tensorflow.keras.models import *
+from tensorflow.keras.layers import *
+
 
 from .config import IMAGE_ORDERING
 
@@ -30,7 +34,7 @@ def vanilla_encoder(input_height=224,  input_width=224, channels=3):
 
     x = (ZeroPadding2D((pad, pad), data_format=IMAGE_ORDERING))(x)
     x = (Conv2D(128, (kernel, kernel), data_format=IMAGE_ORDERING,
-         padding='valid'))(x)
+                padding='valid'))(x)
     x = (BatchNormalization())(x)
     x = (Activation('relu'))(x)
     x = (MaxPooling2D((pool_size, pool_size), data_format=IMAGE_ORDERING))(x)
@@ -43,7 +47,7 @@ def vanilla_encoder(input_height=224,  input_width=224, channels=3):
         x = (BatchNormalization())(x)
         x = (Activation('relu'))(x)
         x = (MaxPooling2D((pool_size, pool_size),
-             data_format=IMAGE_ORDERING))(x)
+                          data_format=IMAGE_ORDERING))(x)
         levels.append(x)
 
     return img_input, levels
