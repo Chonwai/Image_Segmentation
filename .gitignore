@@ -1,6 +1,6 @@
 data/
 checkpoint/*
-
+oc_dataset/
 
 sync.expect
 
