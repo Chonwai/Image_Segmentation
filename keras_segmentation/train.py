@@ -6,6 +6,7 @@ from .data_utils.data_loader import image_segmentation_generator, \
 import six
 from keras.callbacks import Callback
 from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import metrics
 import tensorflow as tf
 import glob
 import sys
@@ -90,6 +91,7 @@ def train(model,
                              # cv2.IMREAD_GRAYSCALE = 0,
                              # cv2.IMREAD_UNCHANGED = -1 (4 channels like RGBA)
           ):
+    print(validate)
     from .models.all_models import model_from_name
     # check if user gives model name instead of the model object
     if isinstance(model, six.string_types):
@@ -120,7 +122,7 @@ def train(model,
 
         model.compile(loss=loss_k,
                       optimizer=optimizer_name,
-                      metrics=['mse', 'accuracy'])
+                      metrics=['mse', 'accuracy', metrics.categorical_accuracy])
 
     if checkpoints_path is not None:
         config_file = checkpoints_path + "_config.json"
