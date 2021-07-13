@@ -1,6 +1,3 @@
-# import keras
-# from keras.models import *
-# from keras.layers import *
 import tensorflow.keras as keras
 from tensorflow.keras.models import *
 from tensorflow.keras.layers import *
